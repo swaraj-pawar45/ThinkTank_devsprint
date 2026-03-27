@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useStore } from '../store/useStore';
+import { useStore } from '../../store/useStore';
 
 const ServerSimulator = () => {
   const { incrementImpact, foodFeed, donors, set } = useStore();
