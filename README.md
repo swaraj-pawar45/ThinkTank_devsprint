@@ -3,7 +3,7 @@
 
 **Team:** ThinkTank  
 **Member:** Shubham Singh ([iamshubham369](https://github.com/iamshubham369))  
-**Deployment:** [Vercel Deployment Link Coming Soon]  
+**Deployment:** [https://y-umber-eta.vercel.app](https://y-umber-eta.vercel.app)  
 
 ---
 
