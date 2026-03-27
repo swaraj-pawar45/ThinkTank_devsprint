@@ -1,0 +1,141 @@
+:root {
+  /* Base Colors - Layer 1 Identity & Design System */
+  --sand-50: #FDFAF4;   /* page background */
+  --sand-100: #F5F0E8;  /* card surfaces */
+  --sand-200: #E8DFD0;  /* borders, dividers */
+
+  /* Primary — Forest Green */
+  --green-600: #2D5016;  /* primary text on light mode */
+  --green-500: #3D6B1F;  /* buttons, active states */
+  --green-400: #4F8A2A;  /* hover states */
+  --green-100: #EAF3DE;  /* light tints, badges */
+
+  /* Accent — Saffron */
+  --saffron-500: #D4821A; /* CTA, highlights, glow */
+  --saffron-400: #E8971E; /* hover state CTA */
+  --saffron-100: #FAEEDA; /* soft badge background */
+
+  /* Dark mode override colors */
+  --dark-bg: #0F1A0A;
+  --dark-card: #162110;
+  --dark-border: #2A3D1A;
+
+  /* Semantic palette */
+  --trust: var(--green-500);
+  --urgent: #C0392B;
+  --neutral: #6B7280;
+
+  /* Typography Stacks */
+  --font-display: 'Cormorant Garamond', serif;   /* Hero headings — editorial gravitas */
+  --font-ui: 'DM Sans', sans-serif;              /* Body, labels, navigation — clean utility */
+  --font-mono: 'JetBrains Mono', monospace;      /* Stats, numbers, data points */
+
+  /* Responsive Breakpoints */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* Spacing and Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease-out;
+}
+
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--sand-50);
+  color: var(--green-600);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Base Motion - Layer 1.5 Motion Philosophy */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+
+/* Interactive Elements */
+a, button {
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--saffron-500);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--saffron-400);
+  transform: scale(1.02);
+}
+
+.card {
+  background-color: var(--sand-100);
+  border: 1px solid var(--sand-200);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: var(--transition-fast);
+}
+
+.card:hover {
+  transform: scale(1.02);
+  border-color: var(--sand-200);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode handling can be added with .dark-mode class or media query */
+@media (prefers-color-scheme: dark) {
+  body.auto-dark {
+    background-color: var(--dark-bg);
+    color: var(--sand-50);
+  }
+}

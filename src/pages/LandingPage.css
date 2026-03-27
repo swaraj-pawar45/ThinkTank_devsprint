@@ -1,0 +1,267 @@
+.landing-page {
+  background-color: var(--sand-50);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* HERO SECTION (Layer 2.2.1-2) */
+.hero {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.hero-content {
+  max-width: 900px;
+  text-align: center;
+  z-index: 2;
+}
+
+.hindi-label {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--saffron-500);
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1.1;
+  color: var(--green-600);
+  margin-bottom: 32px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-large {
+  padding: 16px 36px;
+  font-size: 1.05rem;
+}
+
+.btn-outline {
+  background: none;
+  border: 1px solid var(--sand-200);
+  padding: 14px 32px;
+  font-weight: 500;
+  color: var(--green-600);
+  border-radius: var(--radius-sm);
+}
+
+.btn-outline:hover {
+  background-color: var(--sand-100);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 64px;
+  margin-top: 80px;
+  z-index: 2;
+}
+
+.hero-stat-card {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--green-600);
+}
+
+/* PROBLEM SECTION (Layer 2.2.3) */
+.problem-section {
+  padding: 120px 40px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+
+.problem-metric h3 {
+  font-size: 4rem;
+  color: var(--urgent);
+  margin-bottom: 24px;
+}
+
+.problem-metric p {
+  font-size: 1.25rem;
+  opacity: 0.8;
+}
+
+.leakage-bar .label {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.bar-bg {
+  height: 12px;
+  background-color: var(--sand-200);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: var(--urgent);
+  border-radius: 6px;
+}
+
+.problem-chart .caption {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-top: 16px;
+}
+
+/* IMPACT INVERSE SECTION (Layer 2.2.5) */
+.impact-inverse-section {
+  background-color: var(--green-600);
+  padding: 140px 0;
+  color: var(--sand-50);
+}
+
+.impact-inverse-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.impact-inverse-copy h2 {
+  font-size: 3.5rem;
+  margin-bottom: 32px;
+}
+
+.impact-inverse-copy p {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.impact-amount {
+  font-size: 4rem;
+  font-weight: 700;
+  opacity: 1;
+  color: var(--saffron-500);
+}
+
+.impact-inverse-viz {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* AUDIENCE SECTION (Layer 2.2.7) */
+.audience-section {
+  padding: 120px 40px;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.audience-card {
+  padding: 40px 32px;
+  background-color: var(--sand-50);
+  border: 1px solid var(--sand-200);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--green-100);
+  color: var(--green-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.audience-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+/* FOOTER (Layer 2.2.8) */
+.footer {
+  padding: 60px 0;
+  border-top: 1px solid var(--sand-200);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green-600);
+}
+
+.footer-ministry-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nic-placeholder {
+  font-weight: 700;
+  font-size: 24px;
+  opacity: 0.4;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 13px;
+  color: var(--green-600);
+  opacity: 0.6;
+}
