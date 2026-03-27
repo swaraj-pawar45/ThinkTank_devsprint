@@ -35,9 +35,8 @@ const DonorDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [aiMatch, setAiMatch] = useState(null);
-  const [formData, setFormData] = useState({ type: 'cooked', qty: '50', unit: 'Servings', isUrgent: false });
-
-  const { addFoodSurplus } = useStore();
+  const { addFoodSurplus, foodFeed } = useStore();
+  const myDonations = foodFeed.filter(f => f.donorName === "John's Kitchen");
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
@@ -188,12 +187,38 @@ const DonorDashboard = () => {
 
         {activeTab === 'history' && (
           <div className="history-view fade-up">
-            <h2>Recent Impact logs</h2>
+            <h2 style={{ marginBottom: '1.5rem' }}>Recent Impact Logs</h2>
             <div className="history-list">
-              <div className="history-item card">
-                <strong>45 Cooked Meals</strong>
-                <span>Umeed Trust • Successfully Delivered</span>
-              </div>
+              {myDonations.length > 0 ? (
+                myDonations.map(donation => (
+                  <div key={donation.id} className="history-item card fade-up" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', padding: '1.5rem', borderLeft: `4px solid ${donation.status === 'Critical' ? '#ef4444' : (donation.status === 'Matched' ? '#10b981' : 'var(--saffron-500)')}` }}>
+                    <div>
+                      <strong style={{ fontSize: '1.1rem' }}>{donation.qty} {donation.type}</strong>
+                      <div className="text-dim" style={{ fontSize: '12px', marginTop: '4px' }}>
+                        ID: {donation.id} • Posted {new Date(donation.createdAt).toLocaleTimeString()}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span className={`status-pill ${donation.status.toLowerCase()}`} style={{ 
+                        padding: '4px 12px', 
+                        borderRadius: '20px', 
+                        fontSize: '11px', 
+                        fontWeight: '800', 
+                        textTransform: 'uppercase',
+                        background: donation.status === 'Critical' ? 'rgba(239, 68, 68, 0.1)' : (donation.status === 'Matched' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(212, 130, 26, 0.1)'),
+                        color: donation.status === 'Critical' ? '#ef4444' : (donation.status === 'Matched' ? '#10b981' : 'var(--saffron-500)'),
+                        border: `1px solid currentColor`
+                      }}>
+                        {donation.status}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="empty-state text-center" style={{ padding: '4rem', opacity: 0.5 }}>
+                  No donations logged yet. Start a new run to see impact data.
+                </div>
+              )}
             </div>
           </div>
         )}

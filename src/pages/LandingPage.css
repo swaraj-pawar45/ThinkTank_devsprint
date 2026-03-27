@@ -103,16 +103,22 @@
 }
 
 .btn-outline {
-  background: none;
-  border: 1px solid var(--sand-200);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   padding: 14px 32px;
-  font-weight: 500;
-  color: var(--green-600);
-  border-radius: var(--radius-sm);
+  font-weight: 700;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn-outline:hover {
   background-color: var(--sand-100);
+  transform: translateY(-4px);
+  border-color: var(--saffron-500);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 15px rgba(212, 130, 26, 0.2);
 }
 
 .hero-stats {
@@ -291,6 +297,16 @@
 .feature-block {
   padding: 3rem;
   text-align: center;
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.feature-block:hover {
+  transform: translateY(-15px) scale(1.03);
+  border-color: var(--saffron-500);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(212, 130, 26, 0.3);
 }
 
 .feature-block svg {
@@ -324,6 +340,16 @@
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--saffron-500);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .quote-text {
@@ -358,6 +384,14 @@
 
 .faq-item {
   padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  background: rgba(255,255,255,0.02);
+  border-color: var(--saffron-500);
 }
 
 .faq-item h4 {
@@ -376,16 +410,7 @@
   padding: 3rem 0 6rem 0;
 }
 
-.cta-banner {
-  padding: 4rem 2rem;
-  background: linear-gradient(145deg, var(--sand-100), rgba(212, 130, 26, 0.05));
-  border: 1px solid var(--saffron-500);
-}
-
-.cta-banner h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
+/* CTA Banner handled by index.css unified beast styles */
 
 @media (max-width: 768px) {
   .steps-container {
@@ -408,6 +433,20 @@
   padding: 40px 32px;
   background-color: var(--sand-50);
   border: 1px solid var(--sand-200);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.audience-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: var(--saffron-500);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(212, 130, 26, 0.3);
+}
+
+.audience-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .card-icon {

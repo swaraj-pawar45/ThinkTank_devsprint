@@ -14,8 +14,11 @@ const initialNGOs = [
 ];
 
 const initialFoodFeed = [
-  { id: 'F001', donorId: 'D101', donorName: "Hotel Royal Plaza", type: "Cooked Meals", qty: "45 Servings", dist: "1.2km", status: "New", createdAt: new Date(Date.now() - 15 * 60000).toISOString() },
-  { id: 'F002', donorId: 'D102', donorName: "Big Bazaar", type: "Raw Grains", qty: "120kg", dist: "3.5km", status: "Critical", createdAt: new Date(Date.now() - 2 * 60000).toISOString() }
+  { id: 'F001', donorId: 'D-JK-1', donorName: "John's Kitchen", type: "Cooked Meals", qty: "45 Servings", dist: "1.2km", status: "Matched", createdAt: new Date(Date.now() - 3600000).toISOString() },
+  { id: 'F002', donorId: 'D-JK-1', donorName: "John's Kitchen", type: "Raw Grains", qty: "120kg", dist: "3.5km", status: "Critical", createdAt: new Date(Date.now() - 7200000).toISOString() },
+  { id: 'F003', donorId: 'D-JK-1', donorName: "John's Kitchen", type: "Baked Goods", qty: "20kg", dist: "0.8km", status: "Matched", createdAt: new Date(Date.now() - 86400000).toISOString() },
+  { id: 'F004', donorId: 'D-JK-1', donorName: "John's Kitchen", type: "Fresh Produce", qty: "50kg", dist: "2.1km", status: "New", createdAt: new Date(Date.now() - 172800000).toISOString() },
+  { id: 'F005', donorId: 'D-JK-2', donorName: "Hotel Royal Plaza", type: "Cooked Meals", qty: "30 Servings", dist: "4.2km", status: "New", createdAt: new Date(Date.now() - 15 * 60000).toISOString() }
 ];
 
 export const useStore = create(

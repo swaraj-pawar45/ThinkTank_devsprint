@@ -100,19 +100,43 @@ a, button {
   background-color: var(--saffron-500);
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 12px 28px;
   font-family: var(--font-ui);
-  font-weight: 700;
-  border-radius: var(--radius-sm);
+  font-weight: 800;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(212, 130, 26, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn-primary:hover {
   background-color: var(--saffron-400);
-  transform: scale(1.02);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(212, 130, 26, 0.6);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+.cta-banner {
+  padding: 5rem 2rem;
+  background: linear-gradient(145deg, rgba(31, 41, 55, 0.8), rgba(212, 130, 26, 0.05));
+  border: 1px solid rgba(212, 130, 26, 0.3);
+  border-radius: 32px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  transition: all 0.5s ease;
+}
+
+.cta-banner:hover {
+  border-color: var(--saffron-500);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 30px rgba(212, 130, 26, 0.1);
+}
+
+.cta-banner h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
 }
 
 .card {
