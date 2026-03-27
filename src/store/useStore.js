@@ -52,7 +52,7 @@ export const useStore = create(
         const item = {
           id: `F00${get().foodFeed.length + 1}`,
           ...newSurplus,
-          status: 'New',
+          status: newSurplus.status || 'New',
           createdAt: new Date().toISOString()
         };
         

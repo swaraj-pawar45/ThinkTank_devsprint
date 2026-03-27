@@ -1,24 +1,25 @@
 :root {
-  /* Base Colors - Layer 1 Identity & Design System */
-  --sand-50: #FDFAF4;   /* page background */
-  --sand-100: #F5F0E8;  /* card surfaces */
-  --sand-200: #E8DFD0;  /* borders, dividers */
+  /* Base Colors - Soft Slate Dark Theme */
+  --sand-50: #111827;   /* Slate Gray 900 for page background, not pure black */
+  --sand-100: #1F2937;  /* Slate Gray 800 for card surfaces */
+  --sand-200: #374151;  /* Slate Gray 700 for borders and dividers */
 
-  /* Primary — Forest Green */
-  --green-600: #2D5016;  /* primary text on light mode */
-  --green-500: #3D6B1F;  /* buttons, active states */
-  --green-400: #4F8A2A;  /* hover states */
-  --green-100: #EAF3DE;  /* light tints, badges */
+  /* Primary — Minimalist High Contrast (overriding green naming) */
+  --green-600: #FAFAFA;  /* Primary text (white) */
+  --green-500: #A3A3A3;  /* Sub-text / muted accents */
+  --green-400: #E5E5E5;  /* Hover text */
+  --green-100: #1e1e1e;  /* Soft dark pill backgrounds */
 
-  /* Accent — Saffron */
+  /* Accent — Saffron (Kept for glowing contrast) */
   --saffron-500: #D4821A; /* CTA, highlights, glow */
   --saffron-400: #E8971E; /* hover state CTA */
-  --saffron-100: #FAEEDA; /* soft badge background */
-
-  /* Dark mode override colors */
-  --dark-bg: #0F1A0A;
-  --dark-card: #162110;
-  --dark-border: #2A3D1A;
+  --saffron-100: #2d1b06; /* dark saffron badge background */
+  
+  --blue-500: #3b82f6;
+  --green-neon: #10b981;
+  
+  --bg-card: var(--sand-100);
+  --border-light: var(--sand-200);
 
   /* Semantic palette */
   --trust: var(--green-500);
@@ -110,17 +111,80 @@ a, button {
   transform: scale(1.02);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .card {
   background-color: var(--sand-100);
   border: 1px solid var(--sand-200);
   border-radius: var(--radius-md);
   padding: 24px;
-  transition: var(--transition-fast);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
-  transform: scale(1.02);
-  border-color: var(--sand-200);
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--saffron-500);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 130, 26, 0.2);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.text-gradient-saffron {
+  background: linear-gradient(135deg, #fbbf24, #d4821a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.font-bold { font-weight: 800; }
+.text-dim { opacity: 0.5; }
+.text-saffron { color: var(--saffron-500); }
+.text-green { color: var(--green-neon); }
+
+@keyframes shine {
+  from { left: -100%; }
+  to { left: 100%; }
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+.btn-primary:hover::after {
+  animation: shine 0.8s forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

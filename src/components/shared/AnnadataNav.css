@@ -21,21 +21,7 @@
   position: relative;
 }
 
-/* Nav Logo Motif (Layer 3.6 trust signals) */
-.annadata-nav::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
-  background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="%232D5016" stroke-width="0.5" stroke-dasharray="1 1 opacity:0.1"/><path d="M12 2v20M2 12h20M5 5l14 14M5 19l14-14" stroke="%232D5016" stroke-width="0.2"/></svg>');
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.05;
-  pointer-events: none;
-}
+/* Nav Logo Motif (Removed per user request) */
 
 .nav-logo {
   font-family: var(--font-display);
@@ -80,6 +66,26 @@
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.nav-logout-btn {
+  background: none;
+  border: 1px solid var(--border-light, #ddd);
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: var(--green-600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-logout-btn:hover {
+  background-color: var(--green-100);
+  border-color: var(--green-500);
 }
 
 .btn-lang {

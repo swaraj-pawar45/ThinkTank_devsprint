@@ -31,121 +31,270 @@
 /* HERO STATS (Row 1) */
 .impact-hero-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 32px;
-  margin-bottom: 32px;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .hero-stat-main.card {
-  padding: 60px;
+  padding: 50px;
   display: flex;
   align-items: center;
-  gap: 60px;
-  background: radial-gradient(circle at top right, var(--sand-100), var(--sand-50));
+  gap: 50px;
+  background: radial-gradient(circle at top right, rgba(212, 130, 26, 0.05), transparent);
+  border: 1px solid rgba(212, 130, 26, 0.2);
 }
 
 .orb-viz {
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   flex-shrink: 0;
 }
 
-.counter-stack {
-  display: flex;
-  flex-direction: column;
-}
-
 .counter-stack .label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  opacity: 0.5;
+  color: var(--saffron-500);
+  letter-spacing: 0.1em;
   margin-bottom: 8px;
 }
 
 .main-counter {
-  font-size: 4rem;
-  font-weight: 800;
-  color: var(--green-600);
-  line-height: 1;
-  margin-bottom: 12px;
+  font-size: 5rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 0.9;
+  margin-bottom: 16px;
+  letter-spacing: -2px;
 }
 
-.sub-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--green-400);
+.glitch-text {
+  position: relative;
 }
 
 .impact-meta-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.meta-card.card {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  text-align: center;
-}
-
-.meta-card strong {
-  font-size: 2.5rem;
-  color: var(--green-600);
-}
-
-.meta-card span {
-  font-size: 12px;
-  font-weight: 700;
-  opacity: 0.5;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* DATA GRID (Row 2) */
-.impact-data-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+}
+
+.meta-card.card.glass {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.icon-ring {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.neon-green { box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); color: #10b981; }
+.neon-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); color: #3b82f6; }
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-info strong {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.meta-info span {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.4;
+  margin-top: 4px;
+}
+
+/* ENVIRONMENTAL STATS */
+.environmental-beast-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   margin-bottom: 32px;
+}
+
+.beast-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: rgba(255,255,255,0.01);
+}
+
+.beast-stat-card h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.beast-stat-card p {
+  font-size: 12px;
+  opacity: 0.5;
+  margin: 0;
+}
+
+/* MAIN CONTENT SPLIT */
+.impact-main-content {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.left-visual-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .growth-panel, .category-panel {
   padding: 40px;
 }
 
-.growth-panel h3, .category-panel h3 {
-  font-size: 1.25rem;
-  margin-bottom: 32px;
+.badge-live {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.chart-box {
-  width: 100%;
+.badge-live::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
 }
 
-.pie-legend {
+.composition-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 32px;
+  align-items: center;
+  gap: 40px;
 }
 
-.l-item {
+.pie-legend-beast {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legend-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
 }
 
-.l-item .dot {
+.legend-row .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-row .label {
+  flex: 1;
+  font-size: 13px;
+}
+
+.legend-row .val {
+  font-weight: 800;
+  font-family: monospace;
+}
+
+/* LEDGER COLUMN */
+.ledger-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ledger-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ledger-entry {
+  padding: 20px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  border-left: 3px solid var(--saffron-500);
+}
+
+.tx-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tx-id { font-size: 12px; font-weight: 700; }
+.tx-hash { font-size: 10px; opacity: 0.4; }
+
+.tx-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.tx-body strong { font-size: 1.1rem; }
+.tx-qty { font-weight: 800; font-family: monospace; }
+
+.tx-footer {
+  font-size: 10px;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-dot-pulse {
   width: 10px;
   height: 10px;
+  background: #10b981;
   border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulse 2s infinite;
+}
+
+.btn-full-ledger {
+  margin-top: 24px;
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* LEADERBOARD (Row 3) */

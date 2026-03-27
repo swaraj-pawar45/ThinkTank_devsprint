@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { useFrame } from './threeUtils'; // We'll create a simple hook for this
 
-const ParticleField = () => {
+const ParticleField = ({ absolute = false }) => {
   const containerRef = useRef();
   const mouse = useRef({ x: 0, y: 0 });
   const scrollY = useRef(0);
@@ -127,7 +127,7 @@ const ParticleField = () => {
     <div 
       ref={containerRef} 
       style={{ 
-        position: 'fixed', 
+        position: absolute ? 'absolute' : 'fixed', 
         top: 0, 
         left: 0, 
         width: '100%', 
