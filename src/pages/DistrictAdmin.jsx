@@ -203,7 +203,9 @@ const DistrictAdmin = () => {
                 <h4>Exclusion Error Detected</h4>
                 <p>{c.count} Households in {c.ward} identified for inclusion via AI predictive mapping.</p>
               </div>
-              <button className="btn-text" onClick={() => setInclusionCards([])}>Approve Group Access →</button>
+              <button className="btn-primary" style={{ marginLeft: 'auto', background: 'var(--saffron-500)', borderColor: 'var(--saffron-500)', boxShadow: '0 4px 15px rgba(212, 130, 26, 0.3)' }} onClick={() => setInclusionCards([])}>
+                <ClipboardCheck size={18} style={{marginRight: '8px'}}/> Approve Group Access
+              </button>
             </div>
           ))}
           {inclusionCards.length === 0 && <p className="text-green fade-up" style={{display:'flex', alignItems:'center', gap:'8px', padding: '1rem'}}><CheckCircle2 size={24}/> AI Algorithm Auth-Provisioning Complete.</p>}
