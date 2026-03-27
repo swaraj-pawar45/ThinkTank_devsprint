@@ -1,16 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ParticleField from '../components/three/ParticleField';
 import ImpactOrb from '../components/three/ImpactOrb';
-import { ShieldCheck, HeartPulse, Recycle, Map } from 'lucide-react';
+import { ShieldCheck, HeartPulse, Recycle, Map, Users } from 'lucide-react';
 import { useStore } from '../store/useStore';
+import { useAuth } from '../context/AuthContext';
 import './LandingPage.css';
 
 const LandingPage = () => {
   const { impactStats } = useStore();
+  const { user, openAuthModal } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAction = (path, role = null) => {
+    if (user) {
+      if (role && user.role !== role) {
+        openAuthModal('login'); // Wrong role → prompt re-login
+      } else {
+        navigate(path);
+      }
+    } else {
+      openAuthModal('signup');
+    }
+  };
 
   return (
     <div className="landing-page">
+      
       <section className="hero">
         <ParticleField />
         <div className="hero-content fade-up stagger-1">
@@ -19,11 +35,11 @@ const LandingPage = () => {
             Feeding Bharat with Digital Integrity.
           </h1>
           <p className="hero-subtitle">
-            India's Intelligent Food Bridge Platform — connecting surplus to the underserved with blockchain accountability.
+            The intelligent bridge connecting surplus food hubs to the underserved with blockchain-verified accountability.
           </p>
           <div className="hero-actions">
-            <NavLink to="/donor" className="btn-primary btn-large">Post Surplus →</NavLink>
-            <button className="btn-outline">See How It Works</button>
+            <button onClick={() => handleAction('/donor', 'donor')} className="btn-primary btn-large">Post Surplus →</button>
+            <button onClick={() => handleAction('/beneficiary', 'beneficiary')} className="btn-outline">Find Food Near Me</button>
           </div>
         </div>
 
@@ -34,28 +50,33 @@ const LandingPage = () => {
           </div>
           <div className="hero-stat-card">
             <div className="stat-label">Districts Active</div>
-            <div className="stat-value font-mono">247</div>
-          </div>
-          <div className="hero-stat-card">
-            <div className="stat-label">Donors Active</div>
-            <div className="stat-value font-mono">1,120</div>
+            <div className="stat-value font-mono">{impactStats.districts}</div>
           </div>
         </div>
       </section>
 
-      <section className="problem-section container">
-        <div className="problem-grid">
-          <div className="problem-metric fade-up">
-            <h3 className="font-mono">₹2.13L CR.</h3>
-            <p>Annual food subsidy spend. Still 194 Million hungry.</p>
+      <section className="audience-section container">
+        <h2 className="section-title fade-up">Access Your Dashboard</h2>
+        <div className="audience-grid">
+          <div className="audience-card card fade-up stagger-1 clickable" onClick={() => handleAction('/donor', 'donor')}>
+            <div className="card-icon"><Recycle size={32} /></div>
+            <h3>Bulk Donor</h3>
+            <p>Hotels, Weddings, and Businesses connecting surplus to NGOs.</p>
           </div>
-          <div className="problem-chart fade-up stagger-2">
-            <div className="leakage-bar">
-              <span className="label">Systemic Leakage: 18.4%</span>
-              <div className="bar-bg">
-                <div className="bar-fill" style={{ width: '18.4%' }}></div>
-              </div>
-            </div>
+          <div className="audience-card card fade-up stagger-2 clickable" onClick={() => handleAction('/ngo', 'ngo')}>
+            <div className="card-icon"><ShieldCheck size={32} /></div>
+            <h3>NGO Partner</h3>
+            <p>Verification & distribution hub for mapped hungry clusters.</p>
+          </div>
+          <div className="audience-card card fade-up stagger-3 clickable" onClick={() => handleAction('/volunteer', 'volunteer')}>
+            <div className="card-icon"><Users size={32} /></div>
+            <h3>Volunteer</h3>
+            <p>The last-mile bridge moving food from hub to beneficiary.</p>
+          </div>
+          <div className="audience-card card fade-up stagger-3 clickable" onClick={() => handleAction('/government', 'government')}>
+            <div className="card-icon"><Map size={32} /></div>
+            <h3>District Admin</h3>
+            <p>National-level visibility on hunger-points and distribution data.</p>
           </div>
         </div>
       </section>
@@ -65,7 +86,7 @@ const LandingPage = () => {
           <div className="impact-inverse-grid">
             <div className="impact-inverse-copy fade-up">
               <h2>The 19.5× Thesis</h2>
-              <p>By saving {impactStats.leakageReduced}% of leakage, we unlock ₹1,065 Crore—enough to change 5 crore lives.</p>
+              <p>By using ANNADATA Brain to save just 0.5% of subsidy leakage, we unlock ₹1,065 Crore—enough to change 50 million lives.</p>
               <div className="impact-amount font-mono">₹1,065,00,00,000</div>
             </div>
             <div className="impact-inverse-viz animate-pulse">
@@ -75,37 +96,13 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="audience-section container">
-        <h2 className="section-title fade-up">Collaborative Action</h2>
-        <div className="audience-grid">
-          <div className="audience-card card fade-up stagger-1">
-            <div className="card-icon"><Recycle size={32} /></div>
-            <h3>Bulk Donor</h3>
-            <p>Hotels and markets can connect surplus to vetted NGOs instantly.</p>
-          </div>
-          <div className="audience-card card fade-up stagger-2">
-            <div className="card-icon"><ShieldCheck size={32} /></div>
-            <h3>NGO Partner</h3>
-            <p>Distribute verified food with real-time tracking.</p>
-          </div>
-          <div className="audience-card card fade-up stagger-3">
-            <div className="card-icon"><Map size={32} /></div>
-            <h3>Government</h3>
-            <p>Heatmap intelligence on need points.</p>
-          </div>
-          <div className="audience-card card fade-up stagger-3">
-            <div className="card-icon"><HeartPulse size={32} /></div>
-            <h3>Beneficiaries</h3>
-            <p>Dignified access through FPS and NGOs.</p>
-          </div>
-        </div>
-      </section>
-
       <footer className="footer shadow-top">
         <div className="container footer-content">
           <div className="footer-brand font-display">ANNADATA CONNECT</div>
           <div className="footer-links">
             <a href="#">Security Audit</a>
+            <a href="#">Accessibility</a>
+            <a onClick={() => openAuthModal('login')} className="clickable">Go to Login</a>
           </div>
         </div>
       </footer>
@@ -114,3 +111,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

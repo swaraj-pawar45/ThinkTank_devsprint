@@ -313,3 +313,57 @@
   font-size: 40px;
   margin: 0 auto 32px;
 }
+
+/* RESPONSIVE DESIGN (Layer 4) */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .dashboard-sidebar {
+    width: 100%;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--sand-200);
+    flex-direction: row;
+    overflow-x: auto;
+    align-items: center;
+    position: sticky;
+    top: 80px;
+    z-index: 10;
+  }
+  .sidebar-header {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding: 0 20px 0 0;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    white-space: nowrap;
+    gap: 12px;
+  }
+  .sidebar-nav button {
+    padding: 10px 20px;
+    border-left: none;
+    opacity: 0.6;
+  }
+  .sidebar-nav button.active {
+    background-color: var(--green-100);
+    opacity: 1;
+  }
+  .dashboard-main {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .post-form {
+    padding: 24px;
+  }
+  .view-header h1 {
+    font-size: 1.75rem;
+  }
+}

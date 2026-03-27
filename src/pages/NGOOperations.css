@@ -309,3 +309,55 @@
   50% { opacity: 1; }
   100% { opacity: 0.4; }
 }
+
+/* RESPONSIVE DESIGN (Layer 4) */
+@media (max-width: 1024px) {
+  .ngo-dashboard {
+    padding: 100px 20px 40px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .main-ops-grid {
+    grid-template-columns: 1fr;
+  }
+  .ngo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .feed-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .feed-actions {
+    width: 100%;
+  }
+  .feed-actions button {
+    flex: 1;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ngo-header h1 {
+    font-size: 1.75rem;
+  }
+  .delivery-tracker {
+    padding: 24px 16px;
+  }
+  .ops-table-wrapper {
+    overflow-x: auto;
+  }
+}
