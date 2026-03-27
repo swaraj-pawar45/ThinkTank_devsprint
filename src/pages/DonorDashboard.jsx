@@ -12,26 +12,27 @@ import {
   CheckCircle2,
   Info
 } from 'lucide-react';
+import { useStore } from '../store/useStore';
 import './DonorDashboard.css';
 
 const DonorDashboard = () => {
   const [activeTab, setActiveTab] = useState('post');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-
-  // Mock AI Matching Result (Layer 3.2 specification)
   const [aiMatch, setAiMatch] = useState(null);
+  const [formData, setFormData] = useState({ type: 'cooked', qty: '50', unit: 'Servings' });
+
+  const { addFoodSurplus } = useStore();
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate AI matching (Layer 3.1 & 3.2)
     setTimeout(() => {
       setAiMatch({
         ngoCount: 3,
-        distance: '4.2km',
-        eta: '45 mins',
+        distance: '1.2km',
+        eta: '15 mins',
         trustScore: '98%'
       });
       setIsSubmitting(false);
@@ -39,18 +40,23 @@ const DonorDashboard = () => {
   };
 
   const handleConfirmMatch = () => {
+    addFoodSurplus({
+      donorName: "John's Kitchen",
+      type: formData.type === 'cooked' ? 'Cooked Meals' : 'Raw Grains',
+      qty: `${formData.qty} ${formData.unit}`,
+      dist: aiMatch.distance,
+    });
+
     setShowSuccess(true);
-    // Simulate confetti burst or transition
     setTimeout(() => {
       setShowSuccess(false);
       setAiMatch(null);
-      // Reset form or move to History
-    }, 3000);
+      setActiveTab('history');
+    }, 2000);
   };
 
   return (
     <div className="dashboard-container">
-      {/* SIDEBAR (Layer 2.2.2) */}
       <aside className="dashboard-sidebar">
         <div className="sidebar-header">
           <div className="donor-profile">
@@ -62,124 +68,46 @@ const DonorDashboard = () => {
           </div>
         </div>
         <nav className="sidebar-nav">
-          <button 
-            className={activeTab === 'dashboard' ? 'active' : ''} 
-            onClick={() => setActiveTab('dashboard')}
-          >
-            <LayoutDashboard size={20} /> Dashboard
-          </button>
-          <button 
-            className={activeTab === 'post' ? 'active' : ''} 
-            onClick={() => setActiveTab('post')}
-          >
+          <button className={activeTab === 'post' ? 'active' : ''} onClick={() => setActiveTab('post')}>
             <PlusCircle size={20} /> Post Surplus
           </button>
-          <button 
-            className={activeTab === 'history' ? 'active' : ''} 
-            onClick={() => setActiveTab('history')}
-          >
+          <button className={activeTab === 'history' ? 'active' : ''} onClick={() => setActiveTab('history')}>
             <History size={20} /> My Donations
-          </button>
-          <button 
-            className={activeTab === 'impact' ? 'active' : ''} 
-            onClick={() => setActiveTab('impact')}
-          >
-            <BarChart3 size={20} /> Impact Report
-          </button>
-          <button 
-            className={activeTab === 'csr' ? 'active' : ''} 
-            onClick={() => setActiveTab('csr')}
-          >
-            <FileCheck size={20} /> CSR Certificate
-          </button>
-          <hr />
-          <button 
-            className={activeTab === 'settings' ? 'active' : ''} 
-            onClick={() => setActiveTab('settings')}
-          >
-            <Settings size={20} /> Settings
           </button>
         </nav>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
       <main className="dashboard-main">
         {activeTab === 'post' && (
           <div className="post-surplus-view fade-up">
             <header className="view-header">
               <h1>Post Surplus Food</h1>
-              <p>Your surplus can bridge a gap today. AI will match you with the nearest verified NGO.</p>
+              <p>AI will match you with the nearest verified NGO for bridge distribution.</p>
             </header>
 
             <div className="post-grid">
               <form className="post-form card" onSubmit={handlePostSubmit}>
                 <div className="form-section">
-                  <label>What are you donating?</label>
-                  <select required>
-                    <option value="">Select food type</option>
-                    <option value="cooked">Cooked Meals (Dal, Rice, Roti)</option>
-                    <option value="grains">Raw Grains / Pulses</option>
-                    <option value="produce">Fresh Produce (Vegetables/Fruit)</option>
-                    <option value="packaged">Packaged/Canned Food</option>
+                  <label>Food Category</label>
+                  <select value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})}>
+                    <option value="cooked">Cooked Meals</option>
+                    <option value="grains">Raw Grains</option>
                   </select>
                 </div>
-
                 <div className="form-row">
                   <div className="form-section">
                     <label>Quantity</label>
                     <div className="quantity-input">
-                      <input type="number" placeholder="50" required />
-                      <select className="unit-toggle">
+                      <input type="number" value={formData.qty} onChange={e => setFormData({...formData, qty: e.target.value})} />
+                      <select value={formData.unit} onChange={e => setFormData({...formData, unit: e.target.value})}>
                         <option>Servings</option>
                         <option>Kg</option>
-                        <option>Packets</option>
                       </select>
                     </div>
                   </div>
                 </div>
-
-                <div className="form-row">
-                  <div className="form-section">
-                    <label>Available From</label>
-                    <div className="input-with-icon">
-                      <Clock size={16} />
-                      <input type="time" required />
-                    </div>
-                  </div>
-                  <div className="form-section">
-                    <label>Expires By</label>
-                    <div className="input-with-icon">
-                      <Clock size={16} />
-                      <input type="time" required />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <label>Pickup Location</label>
-                  <div className="input-with-icon">
-                    <MapPin size={16} />
-                    <input type="text" placeholder="Detecting location..." value="Indiranagar, Bengaluru" readOnly />
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <label>Dietary Tags</label>
-                  <div className="tag-chips">
-                    <span className="chip active">Veg</span>
-                    <span className="chip">Jain</span>
-                    <span className="chip">Halal</span>
-                    <span className="chip">Gluten-free</span>
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <label>Additional Notes</label>
-                  <textarea placeholder="e.g. Please bring large containers for Dal. Items are fresh from lunch service."></textarea>
-                </div>
-
                 <button type="submit" className="btn-primary" disabled={isSubmitting}>
-                  {isSubmitting ? 'AI Matching...' : 'Connect My Surplus →'}
+                  {isSubmitting ? 'AI Matching...' : 'Connect Surplus →'}
                 </button>
               </form>
 
@@ -187,38 +115,24 @@ const DonorDashboard = () => {
                 {aiMatch ? (
                   <div className="ai-match-card card fade-up">
                     <div className="ai-badge">AI MATCH ACTIVE</div>
-                    <h3>We found {aiMatch.ngoCount} verified matches!</h3>
+                    <h3>{aiMatch.ngoCount} Local NGOs Waiting</h3>
                     <div className="match-stats">
                       <div className="m-stat">
                         <span className="val">{aiMatch.distance}</span>
-                        <span className="lab">Avg. Distance</span>
+                        <span className="lab">Avg. Range</span>
                       </div>
                       <div className="m-stat">
                         <span className="val">{aiMatch.eta}</span>
-                        <span className="lab">Est. Pickup</span>
+                        <span className="lab">Pickup ETA</span>
                       </div>
                     </div>
-                    <p className="match-desc">
-                      <CheckCircle2 size={16} color="var(--green-500)" />
-                      <strong>Aastha Foundation</strong> is available and has 12 volunteers nearby.
-                    </p>
-                    <button className="btn-primary" onClick={handleConfirmMatch}>Confirm & Notify NGOs</button>
+                    <button className="btn-primary" onClick={handleConfirmMatch}>Accept & Broadcast</button>
                   </div>
                 ) : (
                   <div className="ai-wait-card card">
                     <Info size={32} opacity={0.3} />
-                    <h3>AI Matching Intelligence</h3>
-                    <p>Fill out the form to see real-time matches from our network of 4,200+ verified NGOs.</p>
-                  </div>
-                )}
-
-                {showSuccess && (
-                  <div className="success-overlay fade-up">
-                    <div className="success-content card">
-                      <div className="check-icon">✓</div>
-                      <h2>Request Broadcasted!</h2>
-                      <p>Aastha Foundation has accepted your request. Volunteer "Rahul" is 12 mins away.</p>
-                    </div>
+                    <h3>Automated Routing</h3>
+                    <p>Enter details to see real-time NGO capacity in Indiranagar Area.</p>
                   </div>
                 )}
               </aside>
@@ -226,10 +140,25 @@ const DonorDashboard = () => {
           </div>
         )}
 
-        {activeTab !== 'post' && (
-          <div className="placeholder-view">
-            <h2>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Section</h2>
-            <p>This module is under development as per Layer 2.2 structure.</p>
+        {activeTab === 'history' && (
+          <div className="history-view fade-up">
+            <h1>Recent Impact logs</h1>
+            <div className="history-list">
+              <div className="history-item card">
+                <strong>45 Cooked Meals</strong>
+                <span>Umeed Trust • Successfully Delivered</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showSuccess && (
+          <div className="success-overlay fade-up">
+            <div className="success-content card">
+              <div className="check-icon">✓</div>
+              <h2>Broadcast Sent!</h2>
+              <p>NGOs in your area have been notified. Check 'My Donations' for tracking.</p>
+            </div>
           </div>
         )}
       </main>

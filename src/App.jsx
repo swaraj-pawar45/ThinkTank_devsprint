@@ -12,6 +12,7 @@ const ImpactDashboard = lazy(() => import('./pages/ImpactDashboard'));
 
 // Shared Components
 import AnnadataNav from './components/shared/AnnadataNav';
+import ServerSimulator from './components/shared/ServerSimulator';
 
 const LoadingFallback = () => (
   <div style={{
@@ -32,6 +33,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        <ServerSimulator />
         <AnnadataNav />
         <main>
           <Suspense fallback={<LoadingFallback />}>
