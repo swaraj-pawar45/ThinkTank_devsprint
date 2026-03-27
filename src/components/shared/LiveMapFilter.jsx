@@ -7,17 +7,31 @@ const LiveMapFilter = ({ foodFeed, deliveries, role }) => {
 
     // Compute active items based on filter with persistent random coordinates purely for abstract visualization
     const displayItems = useMemo(() => {
-        return foodFeed.map(feed => {
+        const regions = [
+            { name: 'Indiranagar Hub', center: { lat: 30, lng: 30 }, radius: 15 },
+            { name: 'Koramangala Cluster', center: { lat: 70, lng: 30 }, radius: 15 },
+            { name: 'Whitefield Node', center: { lat: 30, lng: 70 }, radius: 15 },
+            { name: 'Electronic City', center: { lat: 70, lng: 70 }, radius: 15 }
+        ];
+
+        return foodFeed.map((feed, idx) => {
             const delivery = deliveries.find(d => d.taskId === feed.id);
             let displayStatus = feed.status;
             if (delivery) displayStatus = delivery.status;
 
+            // Assign to a region based on ID hash
+            const regionIdx = feed.id.charCodeAt(feed.id.length - 1) % regions.length;
+            const region = regions[regionIdx];
+
             return {
                 ...feed,
                 displayStatus,
-                // Assign persistent random hash-based coordinates so pins don't jump around on re-renders
-                lat: (feed.id.charCodeAt(feed.id.length - 1) * 3) % 70 + 15, // 15% to 85%
-                lng: (feed.id.charCodeAt(0) * 7) % 70 + 15
+                regionName: region.name,
+                // Offset within region using character code hashes
+                lat: region.center.lat + (feed.id.charCodeAt(feed.id.length - 1) % 20 - 10),
+                lng: region.center.lng + (feed.id.charCodeAt(0) % 20 - 10),
+                humidity: 45 + (feed.id.charCodeAt(0) % 10),
+                temp: 22 + (feed.id.charCodeAt(0) % 5)
             }
         });
     }, [foodFeed, deliveries]);
@@ -57,6 +71,12 @@ const LiveMapFilter = ({ foodFeed, deliveries, role }) => {
             </div>
             
             <div className="map-plane">
+               {/* Regional Labels */}
+               <div className="region-label" style={{ top: '25%', left: '25%' }}>Indiranagar Ward</div>
+               <div className="region-label" style={{ top: '65%', left: '25%' }}>Koramangala Zone</div>
+               <div className="region-label" style={{ top: '25%', left: '65%' }}>Whitefield Hub</div>
+               <div className="region-label" style={{ top: '65%', left: '65%' }}>E-City Terminal</div>
+
                {filteredItems.map(item => (
                    <div 
                      key={item.id} 
@@ -65,9 +85,20 @@ const LiveMapFilter = ({ foodFeed, deliveries, role }) => {
                    >
                        {item.displayStatus === 'In Transit' ? <Truck size={14} /> : <MapPin size={14} />}
                        <div className="marker-tooltip">
-                           <strong>{item.qty} {item.type}</strong>
-                           <span style={{ fontSize: '12px', opacity: 0.8 }}>From: {item.donorName}</span>
-                           <span className="badge">{item.displayStatus}</span>
+                           <div className="tooltip-header">
+                              <strong>{item.qty} {item.type}</strong>
+                              <span className="badge">{item.displayStatus}</span>
+                           </div>
+                           <div className="tooltip-details">
+                              <span>Origin: {item.donorName}</span>
+                              <span>Region: {item.regionName}</span>
+                              <div className="telemetry-row">
+                                 <span>🌡️ {item.temp}°C</span>
+                                 <span>💧 {item.humidity}%</span>
+                                 <span>📍 {item.dist}</span>
+                              </div>
+                           </div>
+                           <button className="btn-mini-track">View Real-time Node Trace</button>
                        </div>
                    </div>
                ))}

@@ -61,6 +61,18 @@
     background-position: center center;
 }
 
+.region-label {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--green-600);
+    opacity: 0.15;
+    letter-spacing: 0.2em;
+    pointer-events: none;
+    user-select: none;
+}
+
 .map-radar-wrapper {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -141,20 +153,63 @@
     bottom: calc(100% + 15px);
     left: 50%;
     transform: translateX(-50%);
-    background: var(--sand-100);
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border-light);
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 220px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.2s ease;
-    z-index: 50; /* Ensure it floats above everything else */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 50;
     white-space: nowrap;
     color: var(--green-600);
+}
+
+.tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.tooltip-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.telemetry-row {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+    font-family: monospace;
+    font-weight: bold;
+    color: var(--saffron-500);
+}
+
+.btn-mini-track {
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn-mini-track:hover {
+    background: var(--saffron-500);
+    border-color: var(--saffron-500);
 }
 
 /* Tooltip caret */
@@ -166,7 +221,7 @@
     transform: translateX(-50%) rotate(45deg);
     width: 10px;
     height: 10px;
-    background: var(--sand-100);
+    background: rgba(17, 24, 39, 0.95);
     border-right: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
 }
@@ -174,20 +229,18 @@
 .map-marker:hover .marker-tooltip {
     opacity: 1;
     bottom: calc(100% + 10px);
+    pointer-events: all;
 }
 
 .marker-tooltip strong {
     color: var(--green-600);
     font-family: var(--font-ui);
-    margin-bottom: 4px;
 }
 
 .marker-tooltip span.badge {
-    margin-top: 8px;
-    font-size: 11px;
-    padding: 3px 8px;
+    font-size: 9px;
+    padding: 2px 6px;
     background: var(--sand-200);
-    border-radius: 12px;
-    align-self: flex-start;
-    font-weight: 600;
+    border-radius: 4px;
+    font-weight: 800;
 }
